@@ -1,39 +1,27 @@
 {
-  "name": "text-editor-lexi",
+  "name": "vehicle-bookings",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
   },
   "dependencies": {
-    "@lexical/clipboard": "^0.40.0",
-    "@lexical/html": "^0.40.0",
-    "@lexical/link": "^0.40.0",
-    "@lexical/list": "^0.40.0",
-    "@lexical/react": "^0.40.0",
-    "@lexical/rich-text": "^0.40.0",
-    "@lexical/selection": "^0.40.0",
-    "@lexical/table": "^0.40.0",
-    "@lexical/utils": "^0.40.0",
-    "katex": "^0.16.28",
-    "lexical": "^0.40.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "zustand": "^5.0.11"
+    "lucide-react": "^1.39.0",
+    "next": "16.3.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "globals": "^16.5.0",
-    "vite": "^7.3.1"
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }

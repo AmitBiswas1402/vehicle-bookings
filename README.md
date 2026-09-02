@@ -1,120 +1,36 @@
-# 📝 Document Editor
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A React-based document editor built with **Lexical**, supporting rich text, tables, and LaTeX math expressions.
+## Getting Started
 
-## Tech Stack
-
-| Technology | Role |
-|---|---|
-| **Vite** | Fast build tool & dev server with HMR |
-| **React 19** | UI library (JavaScript only, no TypeScript) |
-| **Lexical** | Facebook's extensible text editor framework — handles editor state, DOM reconciliation, and plugin system |
-| **@lexical/table** | First-party table node support (rows, columns, header cells) |
-| **@lexical/react** | React bindings for Lexical (LexicalComposer, RichTextPlugin, HistoryPlugin, etc.) |
-| **Zustand** | Lightweight state management — two stores for editor content and UI state |
-| **KaTeX** | Fast client-side LaTeX math rendering |
-| **localStorage** | Document persistence (structured as a swappable mock API) |
-
-## Features
-
-- **Rich text editing** — Bold, Italic, Underline, Strikethrough with toolbar indicators and keyboard shortcuts
-- **Table support** — Insert tables with configurable rows & columns from the toolbar; editable cells with header row
-- **Math expressions** — Insert inline or block LaTeX math; live KaTeX preview in modal; double-click to edit existing expressions
-- **Page orientation** — Toggle between Portrait (900px) and Landscape (1280px) modes
-- **Page margins** — Choose from No Margin, Narrow, Normal, or Wide presets
-- **Auto-save** — Debounced save to localStorage on every content change with "Saved ✓ / Unsaved changes" indicator
-- **Restore on reload** — Editor state is serialized as JSON and restored from localStorage on page load
-- **Undo/Redo** — Built-in history via Lexical's HistoryPlugin
-
-## How to Run
-
-### Prerequisites
-
-- **Node.js** ≥ 18
-- **npm** ≥ 9
-
-### Steps
+First, run the development server:
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/AmitBiswas1402/lexical-rich-text-editor
-cd lexical-rich-text-editor
-
-# 2. Install dependencies
-npm install
-
-# 3. Start the development server
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Open **http://localhost:5173** in your browser. The editor loads immediately with hot module replacement enabled.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Other Commands
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```bash
-# Production build (outputs to dist/)
-npm run build
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-# Preview the production build locally
-npm run preview
+## Learn More
 
-# Run ESLint
-npm run lint
-```
+To learn more about Next.js, take a look at the following resources:
 
-## Design Decisions
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### 1. Separation of Editor Logic and UI
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-Lexical plugins are **headless** — they register commands and listeners but render nothing. The `Toolbar` component is a pure UI layer that reads state from Zustand and dispatches Lexical commands. This means the toolbar can be redesigned or replaced without touching any editor logic.
+## Deploy on Vercel
 
-### 2. Two Zustand Stores
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-| Store | Purpose |
-|---|---|
-| `editorStore` | Serialized document content, save status, dirty flag |
-| `uiStore` | Toolbar format indicators, modal visibility, page orientation, margins |
-
-Splitting them prevents document-content updates from triggering toolbar re-renders and vice versa.
-
-### 3. Custom Commands Instead of Inline Logic
-
-Table insertion and math insertion use **custom Lexical commands** (`INSERT_TABLE_COMMAND`, `INSERT_MATH_COMMAND`, etc.) defined in their own plugin files. The toolbar dispatches these commands but never constructs Lexical nodes directly. This keeps node-creation logic testable and in one place.
-
-### 4. MathNode as a DecoratorNode
-
-Math expressions are implemented as a Lexical `DecoratorNode` — a node type that renders arbitrary React inside the editor. The `MathNode` stores the LaTeX string and an inline/block flag, and its `decorate()` method returns a `<MathRenderer>` component that calls KaTeX. Double-clicking a rendered expression reopens the edit modal.
-
-`MathRenderer` lives in its own file (`nodes/MathRenderer.jsx`) to satisfy React Fast Refresh, which requires files to export only components or only non-components, not both.
-
-### 5. Persistence as a Mock API
-
-The `utils/persistence.js` module wraps `localStorage` behind `async` functions that return `{ success, data, error }` objects. Every caller already handles the async shape, so swapping in a real backend later requires changing only this one file.
-
-### 6. Plugin Architecture
-
-Each concern is a separate plugin file:
-
-| Plugin | Responsibility |
-|---|---|
-| `ToolbarPlugin` | Syncs Lexical selection state → Zustand UI store |
-| `TablePlugin` | Handles `INSERT_TABLE_COMMAND`, builds table node tree |
-| `MathPlugin` | Handles `INSERT_MATH_COMMAND` and `UPDATE_MATH_COMMAND` |
-| `PersistencePlugin` | Debounced auto-save on every content change |
-
-All are mounted as children of `<LexicalComposer>` and grab the editor instance via `useLexicalComposerContext()`.
-
-### 7. Page Layout Controls
-
-Page orientation (portrait/landscape) and margin presets (none, narrow, normal, wide) are stored in Zustand and applied as CSS classes. This keeps layout purely in CSS with smooth transitions — no editor state is affected.
-
-### 8. Placeholder Alignment
-
-The placeholder text mirrors the active margin preset via matching CSS classes so it always appears exactly where the cursor sits, regardless of which margin is selected.
-
-## Running
-
-```bash
-npm install
-npm run dev      # Start dev server at localhost:5173
-```
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
