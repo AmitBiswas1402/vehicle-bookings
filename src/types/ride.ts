@@ -4,7 +4,7 @@ export interface VehicleOption {
   id: string;
   name: string;
   category: "bike" | "auto" | "mini" | "sedan" | "suv" | "ev";
-  brandTag: "Rapido" | "Ola" | "Uber" | "Eco";
+  brandTag: string;
   tagColor: string;
   tagBg: string;
   description: string;

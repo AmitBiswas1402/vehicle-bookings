@@ -1,12 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b0f17;
-  --foreground: #f8fafc;
-  --card-bg: #111827;
-  --accent-green: #00d26a; /* Ola green */
-  --accent-yellow: #ffc107; /* Rapido yellow */
-  --accent-uber: #000000; /* Uber sleek */
+  --background: #09090b;
+  --foreground: #f4f4f5;
+  --surface-base: #111114;
+  --surface-elevated: #18181b;
+  --surface-overlay: #212126;
+  --border-subtle: #27272a;
+  --border-strong: #3f3f46;
+  --accent-primary: #10b981;
+  --accent-primary-hover: #059669;
+  --accent-secondary: #f59e0b;
 }
 
 @theme inline {
@@ -17,40 +21,48 @@
 }
 
 body {
-  background-color: #0b0f17;
-  color: #f8fafc;
+  background-color: #09090b;
+  color: #f4f4f5;
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
+/* Polished scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #09090b;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 4px;
+  background: #27272a;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #3f3f46;
 }
 
-/* Glowing animations */
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(0, 210, 106, 0.4);
+/* Subtle route animation */
+@keyframes route-flow {
+  from {
+    stroke-dashoffset: 48;
   }
-  50% {
-    box-shadow: 0 0 30px rgba(0, 210, 106, 0.8);
+  to {
+    stroke-dashoffset: 0;
   }
 }
 
-@keyframes radar-sweep {
+.animate-route-flow {
+  stroke-dasharray: 6 8;
+  animation: route-flow 1.8s linear infinite;
+}
+
+/* Subtle gentle radar sweep for search phase */
+@keyframes radar-scan {
   0% {
     transform: rotate(0deg);
   }
@@ -59,34 +71,6 @@ body {
   }
 }
 
-@keyframes dash {
-  to {
-    stroke-dashoffset: -40;
-  }
-}
-
-@keyframes float-vehicle {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2.5s infinite;
-}
-
-.animate-radar {
-  animation: radar-sweep 3s linear infinite;
-}
-
-.animate-dash-route {
-  stroke-dasharray: 8 6;
-  animation: dash 1.5s linear infinite;
-}
-
-.animate-vehicle {
-  animation: float-vehicle 3s ease-in-out infinite;
+.animate-radar-scan {
+  animation: radar-scan 4s linear infinite;
 }

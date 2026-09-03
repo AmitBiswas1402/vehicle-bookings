@@ -5,16 +5,14 @@ import {
   Bike,
   Car,
   TrendingUp,
-  Clock,
-  ShieldCheck,
-  IndianRupee,
   ChevronRight,
   CheckCircle2,
+  Zap,
 } from "lucide-react";
 
 export const DriverPartnerBanner: React.FC = () => {
-  const [vehicleType, setVehicleType] = useState<"bike" | "auto" | "cab">("bike");
-  const [dailyHours, setDailyHours] = useState<number>(6);
+  const [vehicleType, setVehicleType] = useState<"bike" | "auto" | "cab">("cab");
+  const [dailyHours, setDailyHours] = useState<number>(7);
   const [registered, setRegistered] = useState(false);
   const [phone, setPhone] = useState("");
 
@@ -33,60 +31,60 @@ export const DriverPartnerBanner: React.FC = () => {
   };
 
   return (
-    <section className="py-16 border-t border-slate-800 bg-gradient-to-b from-[#090e17] to-[#0d1522]">
+    <section className="py-16 border-t border-zinc-800/80 bg-zinc-950/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left Column: Offer & Earnings Calculator */}
+          {/* Left Column: Earnings Calculator */}
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 rounded-full bg-amber-400/10 border border-amber-400/30 px-3.5 py-1 text-xs font-bold text-amber-300 mb-3">
-              <TrendingUp className="h-3.5 w-3.5 text-amber-400" />
-              <span>Drive with NexRide • Zero Commission for 30 Days</span>
+            <div className="inline-flex items-center gap-2 rounded-md bg-zinc-900 border border-zinc-800 px-3 py-1 text-xs font-medium text-zinc-300 mb-3">
+              <TrendingUp className="h-3.5 w-3.5 text-emerald-400" />
+              <span>Partner Fleet Program • Flexible Operating Hours</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Turn your wheels into daily earnings.{" "}
-              <span className="text-amber-400">Be your own boss.</span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100">
+              Drive with NexRide. Build sustainable earnings on your schedule.
             </h2>
 
-            <p className="mt-3 text-sm text-slate-300 leading-relaxed max-w-xl">
-              Join over 250,000+ happy Captains & Driver Partners. Earn with two-wheelers, auto rickshaws, or commercial cabs with guaranteed daily payouts and accidental coverage.
+            <p className="mt-2 text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-xl">
+              Connect your commercial vehicle, auto rickshaw, or two-wheeler to India&apos;s most efficient urban transit network with transparent commission structures and same-day payouts.
             </p>
 
-            {/* Interactive Earnings Widget */}
-            <div className="mt-6 rounded-2xl bg-slate-900/90 border border-slate-800 p-5 max-w-lg">
-              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
-                Calculate Your Potential Earnings:
+            {/* Earnings Widget */}
+            <div className="mt-6 rounded-2xl bg-zinc-900/80 border border-zinc-800 p-5 max-w-lg">
+              <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider mb-3">
+                Estimated Earning Potential
               </div>
 
               {/* Vehicle Type buttons */}
               <div className="grid grid-cols-3 gap-2 mb-4">
                 <button
                   onClick={() => setVehicleType("bike")}
-                  className={`py-2 px-3 rounded-lg text-xs font-bold border flex items-center justify-center gap-1.5 transition ${
+                  className={`py-2 px-3 rounded-lg text-xs font-medium border flex items-center justify-center gap-1.5 transition ${
                     vehicleType === "bike"
-                      ? "bg-amber-400 text-slate-950 border-amber-400"
-                      : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
+                      ? "bg-zinc-800 text-zinc-100 border-zinc-600 shadow-sm"
+                      : "bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-zinc-200"
                   }`}
                 >
                   <Bike className="h-4 w-4" />
-                  Bike Captain
+                  Bike Partner
                 </button>
                 <button
                   onClick={() => setVehicleType("auto")}
-                  className={`py-2 px-3 rounded-lg text-xs font-bold border flex items-center justify-center gap-1.5 transition ${
+                  className={`py-2 px-3 rounded-lg text-xs font-medium border flex items-center justify-center gap-1.5 transition ${
                     vehicleType === "auto"
-                      ? "bg-amber-400 text-slate-950 border-amber-400"
-                      : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
+                      ? "bg-zinc-800 text-zinc-100 border-zinc-600 shadow-sm"
+                      : "bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-zinc-200"
                   }`}
                 >
+                  <Zap className="h-4 w-4" />
                   Auto Driver
                 </button>
                 <button
                   onClick={() => setVehicleType("cab")}
-                  className={`py-2 px-3 rounded-lg text-xs font-bold border flex items-center justify-center gap-1.5 transition ${
+                  className={`py-2 px-3 rounded-lg text-xs font-medium border flex items-center justify-center gap-1.5 transition ${
                     vehicleType === "cab"
-                      ? "bg-amber-400 text-slate-950 border-amber-400"
-                      : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
+                      ? "bg-zinc-800 text-zinc-100 border-zinc-600 shadow-sm"
+                      : "bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-zinc-200"
                   }`}
                 >
                   <Car className="h-4 w-4" />
@@ -96,9 +94,9 @@ export const DriverPartnerBanner: React.FC = () => {
 
               {/* Daily Hours Slider */}
               <div className="mb-4">
-                <div className="flex justify-between text-xs font-semibold text-slate-300 mb-1">
-                  <span>Hours you want to drive daily:</span>
-                  <span className="text-amber-400 font-bold">{dailyHours} hours/day</span>
+                <div className="flex justify-between text-xs font-medium text-zinc-300 mb-1.5">
+                  <span>Planned daily operating hours:</span>
+                  <span className="text-zinc-100 font-semibold">{dailyHours} hours/day</span>
                 </div>
                 <input
                   type="range"
@@ -107,52 +105,52 @@ export const DriverPartnerBanner: React.FC = () => {
                   step="1"
                   value={dailyHours}
                   onChange={(e) => setDailyHours(parseInt(e.target.value))}
-                  className="w-full accent-amber-400 cursor-pointer"
+                  className="w-full accent-zinc-200 cursor-pointer h-1.5 bg-zinc-800 rounded-lg"
                 />
               </div>
 
               {/* Monthly Income Result */}
-              <div className="flex items-center justify-between pt-3 border-t border-slate-800">
+              <div className="flex items-center justify-between pt-3 border-t border-zinc-800">
                 <div>
-                  <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">
-                    Estimated Monthly Take-Home
+                  <span className="text-[10px] text-zinc-400 uppercase tracking-wider block font-medium">
+                    Estimated Monthly Gross Take-Home
                   </span>
-                  <div className="text-2xl font-black text-amber-400">
+                  <div className="text-xl sm:text-2xl font-bold text-zinc-100">
                     ₹{estimatedMonthlyIncome.toLocaleString("en-IN")}
-                    <span className="text-xs text-slate-400 font-normal"> / month</span>
+                    <span className="text-xs text-zinc-400 font-normal"> / month</span>
                   </div>
                 </div>
-                <span className="text-[11px] text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                  Daily Direct Payouts
+                <span className="text-[11px] text-zinc-300 font-medium bg-zinc-800 px-3 py-1 rounded-md border border-zinc-700">
+                  Daily Direct Settlements
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Instant Registration Card */}
+          {/* Right Column: Registration Card */}
           <div className="lg:col-span-5">
-            <div className="rounded-2xl bg-slate-900 border border-slate-800 p-6 shadow-2xl">
-              <h3 className="text-xl font-bold text-white mb-1">
-                Start Earning in 24 Hours
+            <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6 shadow-xl">
+              <h3 className="text-lg font-bold text-zinc-100 mb-1">
+                Fast-Track Partner Onboarding
               </h3>
-              <p className="text-xs text-slate-400 mb-5">
-                Simple paperless onboarding. Upload Driving License & RC to begin.
+              <p className="text-xs text-zinc-400 mb-5">
+                Paperless digital setup. Submit your mobile number to receive the registration kit.
               </p>
 
               {registered ? (
                 <div className="py-8 text-center space-y-3">
-                  <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                    <CheckCircle2 className="h-6 w-6" />
+                  <div className="flex h-11 w-11 mx-auto items-center justify-center rounded-full bg-emerald-950 border border-emerald-700 text-emerald-400">
+                    <CheckCircle2 className="h-5 w-5" />
                   </div>
-                  <h4 className="text-base font-bold text-white">
-                    Application Initiated!
+                  <h4 className="text-sm font-semibold text-zinc-100">
+                    Application Received
                   </h4>
-                  <p className="text-xs text-slate-300 max-w-xs mx-auto">
-                    We sent an SMS onboarding link to <strong>+91 {phone}</strong>. Our partner agent will call you within 2 hours.
+                  <p className="text-xs text-zinc-400 max-w-xs mx-auto">
+                    An SMS onboarding link has been sent to <strong>+91 {phone}</strong>. Our fleet relationship team will reach out within 2 hours.
                   </p>
                   <button
                     onClick={() => setRegistered(false)}
-                    className="text-xs text-amber-400 font-bold underline"
+                    className="text-xs text-zinc-300 hover:text-white underline"
                   >
                     Submit another number
                   </button>
@@ -160,11 +158,11 @@ export const DriverPartnerBanner: React.FC = () => {
               ) : (
                 <form onSubmit={handleRegister} className="space-y-3.5">
                   <div>
-                    <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
-                      Your Mobile Number
+                    <label className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 block mb-1">
+                      Registered Mobile Number
                     </label>
-                    <div className="flex rounded-xl bg-slate-950 border border-slate-800 overflow-hidden focus-within:border-amber-400">
-                      <span className="px-3 py-2.5 bg-slate-800/80 text-xs font-bold text-slate-300 border-r border-slate-800 flex items-center">
+                    <div className="flex rounded-xl bg-zinc-950 border border-zinc-800 overflow-hidden focus-within:border-zinc-600">
+                      <span className="px-3 py-2 text-xs font-semibold text-zinc-400 bg-zinc-900 border-r border-zinc-800 flex items-center">
                         +91
                       </span>
                       <input
@@ -173,17 +171,17 @@ export const DriverPartnerBanner: React.FC = () => {
                         maxLength={10}
                         value={phone}
                         onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
-                        placeholder="Enter 10-digit mobile"
-                        className="w-full bg-transparent px-3 py-2.5 text-xs font-semibold text-white placeholder-slate-500 focus:outline-none"
+                        placeholder="Enter 10-digit phone"
+                        className="w-full bg-transparent px-3 py-2 text-xs font-medium text-zinc-100 placeholder-zinc-500 focus:outline-none"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                    <label className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 block mb-1">
                       Operating City
                     </label>
-                    <select className="w-full rounded-xl bg-slate-950 border border-slate-800 px-3 py-2.5 text-xs font-medium text-white focus:outline-none focus:border-amber-400">
+                    <select className="w-full rounded-xl bg-zinc-950 border border-zinc-800 px-3 py-2 text-xs font-medium text-zinc-100 focus:outline-none focus:border-zinc-600">
                       <option>Bengaluru</option>
                       <option>Delhi NCR</option>
                       <option>Mumbai</option>
@@ -192,26 +190,26 @@ export const DriverPartnerBanner: React.FC = () => {
                     </select>
                   </div>
 
-                  <div className="space-y-2 pt-2 text-[11px] text-slate-400">
+                  <div className="space-y-2 pt-2 text-[11px] text-zinc-400">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                      <span>Zero registration fees</span>
+                      <span>Zero partner registration or onboarding fee</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                      <span>₹5,00,000 accidental insurance covered</span>
+                      <span>Accidental transit insurance policy included</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                      <span>Daily incentive bonuses for peak hours</span>
+                      <span>Regular peak performance incentive bonuses</span>
                     </div>
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase tracking-wider transition duration-200 shadow-lg shadow-amber-400/20 flex items-center justify-center gap-2 cursor-pointer mt-4"
+                    className="w-full py-3 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 font-semibold text-xs transition duration-200 shadow-sm flex items-center justify-center gap-2 cursor-pointer mt-4"
                   >
-                    <span>Register as Captain</span>
+                    <span>Register as Fleet Partner</span>
                     <ChevronRight className="h-4 w-4" />
                   </button>
                 </form>

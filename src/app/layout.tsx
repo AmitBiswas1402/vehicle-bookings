@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NexRide | Instant Cabs, Auto & Bike Rides (Ola, Uber & Rapido Inspired)",
-  description: "Book city rides, hourly car rentals, intercity outstation cabs, and instant bike taxis with transparent fares, live driver tracking, and verified safety.",
-  keywords: ["cab booking", "taxi service", "rapido bike", "uber ride", "ola cabs", "auto rickshaw", "hourly rental", "outstation"],
+  title: "NexRide | Enterprise Urban Mobility & Multi-Tier Cab Booking",
+  description: "Book verified city cabs, hourly rentals, intercity outstation rides, and rapid bike taxis with transparent rates, real-time tracking, and certified safety.",
+  keywords: ["cab booking", "taxi service", "bike taxi", "hourly car rental", "outstation cabs", "urban mobility"],
 };
 
 export default function RootLayout({
@@ -28,7 +28,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#0b0f17] text-slate-100 selection:bg-emerald-500 selection:text-white">
+      <body className="min-h-full flex flex-col bg-[#09090b] text-zinc-100 selection:bg-emerald-500/30 selection:text-emerald-200">
         {children}
       </body>
     </html>
