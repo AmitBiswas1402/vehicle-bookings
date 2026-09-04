@@ -14,6 +14,13 @@ import {
   Zap,
 } from "lucide-react";
 import { MOCK_CITIES } from "@/data/mockData";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/nextjs";
+import type { User as DbUser } from "@/db/schema";
 
 interface NavbarProps {
   activeMode: "daily" | "rental" | "outstation";
@@ -22,6 +29,7 @@ interface NavbarProps {
   onSelectCity: (city: string) => void;
   onOpenHelpModal: () => void;
   onOpenDriverModal: () => void;
+  currentUser?: DbUser | null;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -31,10 +39,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectCity,
   onOpenHelpModal,
   onOpenDriverModal,
+  currentUser,
 }) => {
   const [isCityOpen, setIsCityOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-zinc-800/80 bg-zinc-950/90 backdrop-blur-md">
@@ -168,14 +176,39 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="hidden sm:inline">24x7 Help</span>
           </button>
 
-          {/* Sign In / User Profile */}
-          <button
-            onClick={() => setIsLoggedIn(!isLoggedIn)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 text-zinc-950 hover:bg-white text-xs font-semibold transition shadow-sm"
-          >
-            <User className="h-3.5 w-3.5" />
-            <span>{isLoggedIn ? "Arjun K." : "Sign In"}</span>
-          </button>
+          {/* Clerk Authentication & User Role Profile */}
+          <SignedIn>
+            <div className="flex items-center gap-2">
+              {currentUser?.role && (
+                <span
+                  className={`hidden sm:inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider border ${
+                    currentUser.role === "ADMIN"
+                      ? "bg-purple-500/15 text-purple-400 border-purple-500/30"
+                      : currentUser.role === "DRIVER"
+                      ? "bg-cyan-500/15 text-cyan-400 border-cyan-500/30"
+                      : "bg-emerald-500/15 text-emerald-400 border-emerald-500/30"
+                  }`}
+                >
+                  {currentUser.role}
+                </span>
+              )}
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: "w-8 h-8 rounded-lg border border-zinc-700",
+                  },
+                }}
+              />
+            </div>
+          </SignedIn>
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 text-zinc-950 hover:bg-white text-xs font-semibold transition shadow-sm cursor-pointer">
+                <User className="h-3.5 w-3.5" />
+                <span>Sign In</span>
+              </button>
+            </SignInButton>
+          </SignedOut>
 
           {/* Mobile hamburger menu toggle */}
           <button
