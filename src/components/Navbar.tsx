@@ -13,14 +13,14 @@ import {
   X,
   Zap,
 } from "lucide-react";
-import { MOCK_CITIES } from "@/data/mockData";
+import { MOCK_CITIES } from "@/db/mockData";
 import {
   SignedIn,
   SignedOut,
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
-import type { User as DbUser } from "@/db/schema";
+import type { User as DbUser } from "@/lib/authorization";
 
 interface NavbarProps {
   activeMode: "daily" | "rental" | "outstation";

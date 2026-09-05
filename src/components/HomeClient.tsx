@@ -13,7 +13,7 @@ import { RideSimulationModal } from "./RideSimulationModal";
 import { HelpModal } from "./HelpModal";
 import { DriverModal } from "./DriverModal";
 import { ServiceMode, ActiveBooking } from "@/types/ride";
-import type { User } from "@/db/schema";
+import type { User } from "@/lib/authorization";
 
 interface HomeClientProps {
   user?: User | null;

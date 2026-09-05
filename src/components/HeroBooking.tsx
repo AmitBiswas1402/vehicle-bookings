@@ -26,7 +26,7 @@ import {
   AVAILABLE_COUPONS,
   RENTAL_PACKAGES,
   OUTSTATION_ROUTES,
-} from "@/data/mockData";
+} from "@/db/mockData";
 import { ServiceMode, ActiveBooking } from "@/types/ride";
 import { LiveRideMap } from "./LiveRideMap";
 
