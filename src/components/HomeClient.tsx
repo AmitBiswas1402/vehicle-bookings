@@ -38,8 +38,6 @@ export function HomeClient({ user }: HomeClientProps) {
     <div className="min-h-screen bg-[#09090b] text-zinc-100 flex flex-col font-sans">
       {/* Sticky Global Navigation */}
       <Navbar
-        activeMode={activeMode}
-        onSelectMode={(mode) => setActiveMode(mode)}
         selectedCity={selectedCity}
         onSelectCity={(city) => setSelectedCity(city)}
         onOpenHelpModal={() => setIsHelpOpen(true)}

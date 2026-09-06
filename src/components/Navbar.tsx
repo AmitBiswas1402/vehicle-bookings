@@ -11,20 +11,16 @@ import {
   PhoneCall,
   Menu,
   X,
-  Zap,
 } from "lucide-react";
 import { MOCK_CITIES } from "@/db/mockData";
 import {
-  SignedIn,
-  SignedOut,
+  Show,
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
 import type { User as DbUser } from "@/lib/authorization";
 
 interface NavbarProps {
-  activeMode: "daily" | "rental" | "outstation";
-  onSelectMode: (mode: "daily" | "rental" | "outstation") => void;
   selectedCity: string;
   onSelectCity: (city: string) => void;
   onOpenHelpModal: () => void;
@@ -33,8 +29,6 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  activeMode,
-  onSelectMode,
   selectedCity,
   onSelectCity,
   onOpenHelpModal,
@@ -69,42 +63,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </a>
 
-          {/* Service Mode Switchers in Header */}
-          <nav className="hidden lg:flex items-center gap-1 rounded-full bg-zinc-900/90 p-1 border border-zinc-800">
-            <button
-              onClick={() => onSelectMode("daily")}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
-                activeMode === "daily"
-                  ? "bg-zinc-800 text-zinc-100 shadow-sm border border-zinc-700/60"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              <Zap className="h-3 w-3 text-emerald-400" />
-              Daily Commute
-            </button>
-            <button
-              onClick={() => onSelectMode("rental")}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
-                activeMode === "rental"
-                  ? "bg-zinc-800 text-zinc-100 shadow-sm border border-zinc-700/60"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              <Car className="h-3 w-3 text-zinc-300" />
-              Hourly Rentals
-            </button>
-            <button
-              onClick={() => onSelectMode("outstation")}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
-                activeMode === "outstation"
-                  ? "bg-zinc-800 text-zinc-100 shadow-sm border border-zinc-700/60"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              <MapPin className="h-3 w-3 text-zinc-300" />
-              Outstation
-            </button>
-          </nav>
         </div>
 
         {/* Right Tools: City, Driver Partner, Help & Login */}
@@ -177,7 +135,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* Clerk Authentication & User Role Profile */}
-          <SignedIn>
+          <Show when="signed-in">
             <div className="flex items-center gap-2">
               {currentUser?.role && (
                 <span
@@ -200,15 +158,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }}
               />
             </div>
-          </SignedIn>
-          <SignedOut>
+          </Show>
+          <Show when="signed-out">
             <SignInButton mode="modal">
               <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 text-zinc-950 hover:bg-white text-xs font-semibold transition shadow-sm cursor-pointer">
                 <User className="h-3.5 w-3.5" />
                 <span>Sign In</span>
               </button>
             </SignInButton>
-          </SignedOut>
+          </Show>
 
           {/* Mobile hamburger menu toggle */}
           <button
@@ -223,52 +181,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-zinc-800 bg-zinc-950 px-4 pt-3 pb-5 space-y-3">
-          <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">
-            Ride Category
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            <button
-              onClick={() => {
-                onSelectMode("daily");
-                setMobileMenuOpen(false);
-              }}
-              className={`p-2.5 rounded-lg text-xs font-medium text-center border ${
-                activeMode === "daily"
-                  ? "bg-zinc-800 border-zinc-700 text-zinc-100"
-                  : "bg-zinc-900 border-zinc-800 text-zinc-400"
-              }`}
-            >
-              Daily Commute
-            </button>
-            <button
-              onClick={() => {
-                onSelectMode("rental");
-                setMobileMenuOpen(false);
-              }}
-              className={`p-2.5 rounded-lg text-xs font-medium text-center border ${
-                activeMode === "rental"
-                  ? "bg-zinc-800 border-zinc-700 text-zinc-100"
-                  : "bg-zinc-900 border-zinc-800 text-zinc-400"
-              }`}
-            >
-              Rentals
-            </button>
-            <button
-              onClick={() => {
-                onSelectMode("outstation");
-                setMobileMenuOpen(false);
-              }}
-              className={`p-2.5 rounded-lg text-xs font-medium text-center border ${
-                activeMode === "outstation"
-                  ? "bg-zinc-800 border-zinc-700 text-zinc-100"
-                  : "bg-zinc-900 border-zinc-800 text-zinc-400"
-              }`}
-            >
-              Outstation
-            </button>
-          </div>
-
-          <div className="pt-2 border-t border-zinc-800 flex justify-between items-center">
+          <div className="flex justify-between items-center">
             <span className="text-xs text-zinc-400">Current City:</span>
             <span className="text-xs font-semibold text-zinc-200">{selectedCity}</span>
           </div>
