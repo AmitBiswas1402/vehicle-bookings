@@ -35,7 +35,7 @@ export function HomeClient({ user }: HomeClientProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col">
       {/* Sticky Global Navigation */}
       <Navbar
         selectedCity={selectedCity}
@@ -45,7 +45,7 @@ export function HomeClient({ user }: HomeClientProps) {
         currentUser={user}
       />
 
-      {/* Main Booking Stage: Left Booking Console + Right Vector Map */}
+      {/* Main Content */}
       <main className="flex-1">
         <HeroBooking
           activeMode={activeMode}
@@ -53,7 +53,7 @@ export function HomeClient({ user }: HomeClientProps) {
           onBookRide={handleBookRide}
         />
 
-        {/* 4 Core Pillars: City Commute, Hourly Rentals, Outstation, Airport */}
+        {/* Service Categories */}
         <ServiceCategories
           onSelectCategory={(mode) => {
             setActiveMode(mode);
@@ -61,20 +61,20 @@ export function HomeClient({ user }: HomeClientProps) {
           }}
         />
 
-        {/* Transparent Fare Estimator & Distance Slider */}
+        {/* Fare Estimator */}
         <FareEstimator />
 
-        {/* Safety Pillars: Start OTP, 24x7 SOS, Live Tracking, Verified Captains */}
+        {/* Safety Features */}
         <SafetyFeatures />
 
-        {/* Driver Partner / Captain Recruitment & Earnings Calculator */}
+        {/* Driver Partner Banner */}
         <DriverPartnerBanner />
 
-        {/* Mobile App QR & Download Section */}
+        {/* App Download Banner */}
         <AppDownloadBanner />
       </main>
 
-      {/* Modern Footer */}
+      {/* Footer */}
       <Footer />
 
       {/* Active Booking Simulation Modal */}
@@ -86,10 +86,10 @@ export function HomeClient({ user }: HomeClientProps) {
         />
       )}
 
-      {/* 24x7 Help Center Modal */}
+      {/* Help Center Modal */}
       <HelpModal isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
 
-      {/* Captain / Driver Onboarding Modal */}
+      {/* Driver Onboarding Modal */}
       <DriverModal isOpen={isDriverOpen} onClose={() => setIsDriverOpen(false)} />
     </div>
   );

@@ -20,65 +20,62 @@ export const ServiceCategories: React.FC<ServiceCategoriesProps> = ({
   const categories = [
     {
       id: "daily",
-      title: "Daily City Commute",
-      tagline: "Bike Taxi, Auto & Compact Cabs",
-      description: "Quickest point-to-point urban transport with metered pricing and typical doorstep arrival under 3 minutes.",
+      title: "Daily City Rides",
+      tagline: "Bike, Auto & Cab",
+      description: "Point-to-point urban transport with metered pricing and doorstep pickup under 3 minutes.",
       startingPrice: "₹29",
       icon: Zap,
-      badge: "Express Transit",
-      capacity: "1 - 4 seats",
+      badge: "Express",
       mode: "daily" as ServiceMode,
+      color: "bg-emerald-50 text-emerald-600",
     },
     {
       id: "rentals",
-      title: "Hourly Chauffeur Rentals",
-      tagline: "One dedicated car for multi-stop days",
-      description: "Book packages from 1 to 12 hours. Make unlimited stops for executive client meetings, shopping rounds, or appointments.",
+      title: "Hourly Rentals",
+      tagline: "One car, multiple stops",
+      description: "Book from 1–12 hours for meetings, shopping, appointments — unlimited stops included.",
       startingPrice: "₹299",
       icon: Clock,
-      badge: "Flexible Stops",
-      capacity: "Sedans & SUVs",
+      badge: "Flexible",
       mode: "rental" as ServiceMode,
+      color: "bg-amber-50 text-amber-600",
     },
     {
       id: "outstation",
       title: "Intercity Outstation",
-      tagline: "Chauffeur-driven highway travel",
-      description: "Comfortable sedans and SUVs for weekend getaways, hill stations, and business trips with verified highway captains.",
+      tagline: "Highway travel",
+      description: "Comfortable sedans and SUVs for weekend getaways and business trips with verified highway drivers.",
       startingPrice: "₹12/km",
       icon: Compass,
-      badge: "Highway Certified",
-      capacity: "Sedan / SUV",
+      badge: "Highway",
       mode: "outstation" as ServiceMode,
+      color: "bg-blue-50 text-blue-600",
     },
     {
       id: "airport",
       title: "Airport Transfers",
-      tagline: "Guaranteed pickups & luggage capacity",
-      description: "Pre-book with live flight tracking. Direct terminal pickup lanes, assisted luggage handling, and zero surge pricing.",
-      startingPrice: "Fixed Rates",
+      tagline: "Guaranteed pickups",
+      description: "Pre-book with flight tracking, terminal pickup lanes, luggage handling, and zero surge pricing.",
+      startingPrice: "Fixed Rate",
       icon: Plane,
-      badge: "Flight Tracking",
-      capacity: "Ample Luggage",
+      badge: "Flight Sync",
       mode: "daily" as ServiceMode,
+      color: "bg-purple-50 text-purple-600",
     },
   ];
 
   return (
-    <section className="py-14 border-t border-zinc-800/80 bg-zinc-950/40">
+    <section className="py-16 bg-gray-50/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
-              Mobility Architecture
-            </span>
-            <h2 className="mt-1 text-2xl font-bold tracking-tight text-zinc-100">
-              Tailored services for every transit requirement
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
+              Our Services
             </h2>
+            <p className="mt-1 text-sm text-slate-500">
+              Choose the right ride for every occasion
+            </p>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-400 max-w-md">
-            From agile single-passenger bike taxis to spacious executive SUVs, choose the exact tier suited for your schedule and route.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -88,40 +85,40 @@ export const ServiceCategories: React.FC<ServiceCategoriesProps> = ({
               <div
                 key={cat.id}
                 onClick={() => onSelectCategory(cat.mode)}
-                className="group relative rounded-2xl bg-zinc-900/60 border border-zinc-800/80 p-5 flex flex-col justify-between transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-900/90 cursor-pointer"
+                className="group relative rounded-2xl bg-white border border-gray-200 p-6 flex flex-col justify-between transition-all duration-200 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-100 shadow-sm">
-                      <Icon className="h-5 w-5 text-emerald-400" />
+                  <div className="flex items-center justify-between mb-5">
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${cat.color}`}>
+                      <Icon className="h-6 w-6" />
                     </div>
-                    <span className="rounded-md bg-zinc-950 border border-zinc-800 px-2 py-0.5 text-[10px] font-medium text-zinc-400">
+                    <span className="rounded-full bg-gray-100 px-2.5 py-1 text-[11px] font-semibold text-slate-500">
                       {cat.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-semibold text-zinc-100 group-hover:text-white transition-colors">
+                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-black transition-colors">
                     {cat.title}
                   </h3>
-                  <p className="text-xs font-medium text-zinc-400 mt-1">
+                  <p className="text-sm font-medium text-slate-500 mt-0.5">
                     {cat.tagline}
                   </p>
-                  <p className="mt-2 text-xs text-zinc-400 leading-relaxed">
+                  <p className="mt-2 text-sm text-slate-400 leading-relaxed">
                     {cat.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-zinc-800/80 flex items-center justify-between">
+                <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] text-zinc-400 uppercase tracking-wider block font-medium">
-                      Rates From
+                    <span className="text-[11px] text-slate-400 uppercase tracking-wider block font-medium">
+                      From
                     </span>
-                    <span className="text-sm font-bold text-zinc-100">
+                    <span className="text-lg font-bold text-slate-900">
                       {cat.startingPrice}
                     </span>
                   </div>
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-800 text-zinc-400 group-hover:bg-zinc-100 group-hover:text-zinc-950 transition-colors">
-                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-slate-400 group-hover:bg-black group-hover:text-white transition-all">
+                    <ArrowUpRight className="h-4 w-4" />
                   </div>
                 </div>
               </div>

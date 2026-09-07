@@ -21,113 +21,76 @@ export const HelpModal: React.FC<HelpModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const faqs = [
-    {
-      q: "How does the 4-digit Start OTP verification work?",
-      a: "Once a Captain is assigned to your ride, a secure 4-digit code is generated on your screen. Provide this code to the driver only after verifying the vehicle's registration number and boarding. The trip meter begins only upon successful OTP validation.",
-    },
-    {
-      q: "What should I do if I left personal belongings in the vehicle?",
-      a: "Contact our 24x7 incident support desk immediately at 1800-200-RIDE with your Booking Reference ID. Our team will coordinate directly with the assigned Captain and arrange safe return.",
-    },
-    {
-      q: "How are metered fares determined?",
-      a: "Fares are calculated strictly based on standard base fare, actual route distance in kilometers, and trip duration in minutes. Applicable GST and parking or toll charges are transparently itemized without hidden surge multipliers.",
-    },
-    {
-      q: "What is the cancellation policy?",
-      a: "You may cancel any ride booking within 3 minutes of Captain assignment at zero fee. If canceled after 3 minutes while the driver is in transit, a nominal arrival compensation fee is charged.",
-    },
+    { q: "How does the 4-digit Start OTP work?", a: "A secure 4-digit code appears on your screen once a captain is assigned. Share it only after verifying the vehicle. The trip starts upon OTP validation." },
+    { q: "What if I left belongings in the vehicle?", a: "Contact our 24×7 support at 1800-200-RIDE with your booking reference. We'll coordinate with the captain for safe return." },
+    { q: "How are fares calculated?", a: "Fares = base fare + distance (km) + time (min). GST included. Toll and parking are itemized separately. No hidden surge." },
+    { q: "What is the cancellation policy?", a: "Free cancellation within 3 minutes of driver assignment. After that, a small arrival compensation fee applies." },
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150">
-      <div className="relative w-full max-w-lg rounded-2xl bg-zinc-900 border border-zinc-800 p-6 shadow-2xl text-zinc-100">
-        <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-slide-up">
+      <div className="relative w-full max-w-lg rounded-2xl bg-white border border-gray-200 p-6 shadow-2xl text-slate-900">
+        <div className="flex items-center justify-between border-b border-gray-100 pb-4">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-800 border border-zinc-700 text-zinc-100">
-              <PhoneCall className="h-4 w-4 text-emerald-400" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+              <PhoneCall className="h-4 w-4" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-zinc-100">
-                24x7 Transit Support & Help Desk
-              </h3>
-              <p className="text-xs text-zinc-400">
-                Direct rider & partner assistance
-              </p>
+              <h3 className="text-sm font-bold text-slate-900">Help & Support</h3>
+              <p className="text-xs text-slate-500">Available 24×7</p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="p-1 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition"
-          >
+          <button onClick={onClose} className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-gray-100 transition">
             <X className="h-4 w-4" />
           </button>
         </div>
 
-        {/* Quick Contact Buttons */}
+        {/* Contact Buttons */}
         <div className="grid grid-cols-2 gap-3 my-4">
-          <a
-            href="tel:18002008888"
-            className="flex items-center gap-3 p-3 rounded-xl bg-zinc-950 border border-zinc-800 hover:border-zinc-700 transition"
-          >
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-emerald-400">
+          <a href="tel:18002008888" className="flex items-center gap-3 p-3.5 rounded-xl bg-gray-50 border border-gray-200 hover:bg-gray-100 transition">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
               <PhoneCall className="h-4 w-4" />
             </div>
             <div className="text-left">
-              <div className="text-xs font-semibold text-zinc-200">Call Dispatch</div>
-              <div className="text-[10px] text-zinc-400">
-                1800-200-RIDE
-              </div>
+              <div className="text-sm font-semibold text-slate-900">Call</div>
+              <div className="text-xs text-slate-500">1800-200-RIDE</div>
             </div>
           </a>
-
-          <button
-            onClick={() => setChatConnected(true)}
-            className="flex items-center gap-3 p-3 rounded-xl bg-zinc-950 border border-zinc-800 hover:border-zinc-700 transition text-left"
-          >
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300">
+          <button onClick={() => setChatConnected(true)} className="flex items-center gap-3 p-3.5 rounded-xl bg-gray-50 border border-gray-200 hover:bg-gray-100 transition text-left">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
               <MessageSquare className="h-4 w-4" />
             </div>
             <div>
-              <div className="text-xs font-semibold text-zinc-200">Live Support Chat</div>
-              <div className="text-[10px] text-zinc-400">
-                {chatConnected ? "Connected (Agent Active)" : "Avg. wait &lt; 1 min"}
-              </div>
+              <div className="text-sm font-semibold text-slate-900">Chat</div>
+              <div className="text-xs text-slate-500">{chatConnected ? "Connected" : "< 1 min wait"}</div>
             </div>
           </button>
         </div>
 
         {chatConnected && (
-          <div className="p-3 mb-4 rounded-xl bg-zinc-950 border border-zinc-800 text-xs text-zinc-300">
-            <span className="font-semibold text-emerald-400">Support Specialist Connected:</span> How may we assist you with your booking or driver assignment today?
+          <div className="p-3 mb-4 rounded-xl bg-emerald-50 border border-emerald-100 text-sm text-slate-700">
+            <span className="font-semibold text-emerald-700">Agent connected:</span> How can we help you today?
           </div>
         )}
 
-        {/* Frequently Asked Questions */}
+        {/* FAQs */}
         <div className="space-y-2">
-          <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider mb-1">
-            Common Support Queries
+          <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+            Frequently Asked
           </div>
           {faqs.map((f, i) => {
             const isOpen = openFaqIndex === i;
             return (
-              <div
-                key={i}
-                className="rounded-xl bg-zinc-950 border border-zinc-800/80 overflow-hidden text-xs"
-              >
+              <div key={i} className="rounded-xl bg-gray-50 border border-gray-200 overflow-hidden text-sm">
                 <button
                   onClick={() => setOpenFaqIndex(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between p-3 text-left font-medium text-zinc-200 hover:text-white"
+                  className="w-full flex items-center justify-between p-3.5 text-left font-medium text-slate-700 hover:text-slate-900"
                 >
                   <span>{f.q}</span>
-                  {isOpen ? (
-                    <ChevronUp className="h-3.5 w-3.5 text-zinc-400 shrink-0 ml-2" />
-                  ) : (
-                    <ChevronDown className="h-3.5 w-3.5 text-zinc-400 shrink-0 ml-2" />
-                  )}
+                  {isOpen ? <ChevronUp className="h-4 w-4 text-slate-400 shrink-0 ml-2" /> : <ChevronDown className="h-4 w-4 text-slate-400 shrink-0 ml-2" />}
                 </button>
                 {isOpen && (
-                  <div className="px-3 pb-3 pt-0 text-zinc-400 leading-relaxed border-t border-zinc-800/50 pt-2">
+                  <div className="px-3.5 pb-3.5 text-slate-500 leading-relaxed border-t border-gray-200 pt-2.5">
                     {f.a}
                   </div>
                 )}
@@ -136,11 +99,8 @@ export const HelpModal: React.FC<HelpModalProps> = ({ isOpen, onClose }) => {
           })}
         </div>
 
-        <button
-          onClick={onClose}
-          className="mt-5 w-full py-2.5 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold transition"
-        >
-          Dismiss Help Desk
+        <button onClick={onClose} className="mt-5 w-full py-3 rounded-xl bg-black hover:bg-gray-900 text-white text-sm font-semibold transition">
+          Close
         </button>
       </div>
     </div>

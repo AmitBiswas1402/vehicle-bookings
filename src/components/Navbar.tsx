@@ -2,15 +2,12 @@
 
 import React, { useState } from "react";
 import {
-  Car,
-  Bike,
-  Shield,
   MapPin,
   ChevronDown,
   User,
-  PhoneCall,
   Menu,
   X,
+  PhoneCall,
 } from "lucide-react";
 import { MOCK_CITIES } from "@/db/mockData";
 import {
@@ -39,112 +36,102 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-zinc-800/80 bg-zinc-950/90 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-lg border-b border-gray-100 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand Logo */}
         <div className="flex items-center gap-8">
-          <a href="#" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-100 shadow-sm">
-              <Car className="h-4 w-4 text-emerald-400" />
+          <a href="#" className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-black">
+              <span className="text-white text-sm font-bold">N</span>
             </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-base sm:text-lg font-bold tracking-tight text-zinc-100">
-                  NEX<span className="text-emerald-400">RIDE</span>
-                </span>
-                <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-medium bg-zinc-900 border border-zinc-800 text-zinc-300">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-                  LIVE
-                </span>
-              </div>
-              <p className="text-[10px] text-zinc-400 hidden sm:block font-medium">
-                Unified Urban Transit Network
-              </p>
-            </div>
+            <span className="text-lg font-extrabold tracking-tight text-slate-900">
+              Nex<span className="text-emerald-600">Ride</span>
+            </span>
           </a>
 
+          {/* Desktop Nav Links */}
+          <nav className="hidden md:flex items-center gap-1">
+            <a href="#" className="px-3 py-2 text-sm font-medium text-slate-900 hover:bg-gray-50 rounded-lg transition">Ride</a>
+            <button
+              onClick={onOpenDriverModal}
+              className="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-gray-50 rounded-lg transition"
+            >
+              Drive
+            </button>
+            <a href="#safety" className="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-gray-50 rounded-lg transition">Safety</a>
+            <button
+              onClick={onOpenHelpModal}
+              className="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-gray-50 rounded-lg transition"
+            >
+              Help
+            </button>
+          </nav>
         </div>
 
-        {/* Right Tools: City, Driver Partner, Help & Login */}
-        <div className="flex items-center gap-2.5">
+        {/* Right Tools */}
+        <div className="flex items-center gap-2">
           {/* City Selector */}
           <div className="relative">
             <button
               onClick={() => setIsCityOpen(!isCityOpen)}
-              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-300 hover:text-white hover:border-zinc-700 transition"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-full bg-gray-50 border border-gray-200 text-sm font-medium text-slate-700 hover:bg-gray-100 transition"
             >
-              <MapPin className="h-3.5 w-3.5 text-emerald-400" />
+              <MapPin className="h-3.5 w-3.5 text-slate-400" />
               <span>{selectedCity}</span>
-              <ChevronDown className="h-3 w-3 text-zinc-400" />
+              <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
             </button>
 
             {isCityOpen && (
-              <div className="absolute right-0 mt-2 w-48 rounded-xl bg-zinc-900 border border-zinc-700 shadow-2xl p-1.5 z-50 animate-in fade-in duration-100">
-                <div className="px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
-                  Select Operating Region
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setIsCityOpen(false)} />
+                <div className="absolute right-0 mt-2 w-52 rounded-2xl bg-white border border-gray-200 shadow-xl p-2 z-50 animate-slide-up">
+                  <div className="px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    Select City
+                  </div>
+                  {MOCK_CITIES.map((city) => (
+                    <button
+                      key={city}
+                      onClick={() => {
+                        onSelectCity(city);
+                        setIsCityOpen(false);
+                      }}
+                      className={`w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition flex items-center justify-between ${
+                        selectedCity === city
+                          ? "bg-gray-100 text-slate-900 font-semibold"
+                          : "text-slate-600 hover:bg-gray-50 hover:text-slate-900"
+                      }`}
+                    >
+                      <span>{city}</span>
+                      {selectedCity === city && (
+                        <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+                      )}
+                    </button>
+                  ))}
                 </div>
-                {MOCK_CITIES.map((city) => (
-                  <button
-                    key={city}
-                    onClick={() => {
-                      onSelectCity(city);
-                      setIsCityOpen(false);
-                    }}
-                    className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center justify-between ${
-                      selectedCity === city
-                        ? "bg-zinc-800 text-zinc-100 font-semibold"
-                        : "text-zinc-400 hover:bg-zinc-800/80 hover:text-zinc-100"
-                    }`}
-                  >
-                    <span>{city}</span>
-                    {selectedCity === city && (
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-                    )}
-                  </button>
-                ))}
-              </div>
+              </>
             )}
           </div>
 
-          {/* Drive / Captain Onboarding button */}
-          <button
-            onClick={onOpenDriverModal}
-            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-xs font-medium transition"
-          >
-            <Bike className="h-3.5 w-3.5 text-zinc-300" />
-            <span>Drive with Us</span>
-          </button>
-
-          {/* Safety Quick Link */}
-          <a
-            href="#safety"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 text-xs font-medium transition"
-          >
-            <Shield className="h-3.5 w-3.5 text-zinc-300" />
-            <span>Safety</span>
-          </a>
-
-          {/* Help button */}
+          {/* Help button (mobile) */}
           <button
             onClick={onOpenHelpModal}
-            className="flex items-center gap-1 p-2 sm:px-2.5 sm:py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white text-xs font-medium transition"
-            title="Customer Support 24x7"
+            className="flex md:hidden items-center p-2 rounded-full text-slate-500 hover:bg-gray-100 transition"
+            title="Help"
           >
-            <PhoneCall className="h-3.5 w-3.5 text-zinc-400" />
-            <span className="hidden sm:inline">24x7 Help</span>
+            <PhoneCall className="h-4 w-4" />
           </button>
 
-          {/* Clerk Authentication & User Role Profile */}
+          {/* Clerk Auth */}
           <Show when="signed-in">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               {currentUser?.role && (
                 <span
-                  className={`hidden sm:inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider border ${
+                  className={`hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold ${
                     currentUser.role === "ADMIN"
-                      ? "bg-purple-500/15 text-purple-400 border-purple-500/30"
+                      ? "bg-purple-50 text-purple-700"
                       : currentUser.role === "DRIVER"
-                      ? "bg-cyan-500/15 text-cyan-400 border-cyan-500/30"
-                      : "bg-emerald-500/15 text-emerald-400 border-emerald-500/30"
+                      ? "bg-sky-50 text-sky-700"
+                      : "bg-emerald-50 text-emerald-700"
                   }`}
                 >
                   {currentUser.role}
@@ -153,7 +140,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <UserButton
                 appearance={{
                   elements: {
-                    avatarBox: "w-8 h-8 rounded-lg border border-zinc-700",
+                    avatarBox: "w-8 h-8 rounded-full ring-2 ring-gray-100",
                   },
                 }}
               />
@@ -161,17 +148,22 @@ export const Navbar: React.FC<NavbarProps> = ({
           </Show>
           <Show when="signed-out">
             <SignInButton mode="modal">
-              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 text-zinc-950 hover:bg-white text-xs font-semibold transition shadow-sm cursor-pointer">
+              <button className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full bg-black text-white hover:bg-gray-800 text-sm font-semibold transition cursor-pointer">
                 <User className="h-3.5 w-3.5" />
-                <span>Sign In</span>
+                <span>Sign in</span>
+              </button>
+            </SignInButton>
+            <SignInButton mode="modal">
+              <button className="sm:hidden flex items-center p-2 rounded-full bg-black text-white hover:bg-gray-800 transition cursor-pointer">
+                <User className="h-4 w-4" />
               </button>
             </SignInButton>
           </Show>
 
-          {/* Mobile hamburger menu toggle */}
+          {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex lg:hidden p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800"
+            className="flex md:hidden p-2 rounded-full text-slate-500 hover:bg-gray-100 transition"
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -180,21 +172,25 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-zinc-800 bg-zinc-950 px-4 pt-3 pb-5 space-y-3">
-          <div className="flex justify-between items-center">
-            <span className="text-xs text-zinc-400">Current City:</span>
-            <span className="text-xs font-semibold text-zinc-200">{selectedCity}</span>
-          </div>
-
+        <div className="md:hidden border-t border-gray-100 bg-white px-4 pt-3 pb-5 space-y-1 animate-slide-up">
+          <a href="#" className="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-900 bg-gray-50">Ride</a>
           <button
-            onClick={() => {
-              onOpenDriverModal();
-              setMobileMenuOpen(false);
-            }}
-            className="w-full py-2.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-100 text-xs font-semibold flex items-center justify-center gap-2 border border-zinc-700"
+            onClick={() => { onOpenDriverModal(); setMobileMenuOpen(false); }}
+            className="w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium text-slate-600 hover:bg-gray-50 transition"
           >
-            <Bike className="h-4 w-4 text-emerald-400" /> Partner Fleet / Drive
+            Drive with Us
           </button>
+          <a href="#safety" className="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-600 hover:bg-gray-50 transition">Safety</a>
+          <button
+            onClick={() => { onOpenHelpModal(); setMobileMenuOpen(false); }}
+            className="w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium text-slate-600 hover:bg-gray-50 transition"
+          >
+            24×7 Help
+          </button>
+          <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
+            <span className="text-xs text-slate-400">Current City</span>
+            <span className="text-xs font-semibold text-slate-700">{selectedCity}</span>
+          </div>
         </div>
       )}
     </header>

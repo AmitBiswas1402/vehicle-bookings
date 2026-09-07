@@ -15,51 +15,47 @@ export const SafetyFeatures: React.FC = () => {
   const safetyPillars = [
     {
       icon: KeyRound,
-      title: "Mandatory 4-Digit Start OTP",
-      description:
-        "Guaranteed vehicle verification. Trips cannot commence until your Captain enters your unique 4-digit code.",
+      title: "4-Digit Start OTP",
+      description: "Trips cannot start until the captain enters your unique code — guaranteed vehicle verification.",
       tag: "Verification",
-      tagColor: "text-zinc-300 bg-zinc-800 border-zinc-700",
+      color: "bg-emerald-50 text-emerald-600",
     },
     {
       icon: PhoneCall,
-      title: "24x7 Safety Response Command",
-      description:
-        "Immediate one-touch SOS escalation connected directly to dedicated dispatch coordinators and regional authorities.",
-      tag: "Immediate Assist",
-      tagColor: "text-zinc-300 bg-zinc-800 border-zinc-700",
+      title: "24×7 Safety Helpline",
+      description: "One-touch SOS escalation connected to dedicated dispatch coordinators and local authorities.",
+      tag: "Emergency",
+      color: "bg-red-50 text-red-600",
     },
     {
       icon: Share2,
-      title: "End-to-End Live Telematics",
-      description:
-        "Share real-time GPS coordinates, vehicle registration number, and route status with designated emergency contacts.",
-      tag: "Family Telemetry",
-      tagColor: "text-zinc-300 bg-zinc-800 border-zinc-700",
+      title: "Live Trip Sharing",
+      description: "Share real-time GPS coordinates, vehicle info, and route status with your emergency contacts.",
+      tag: "Tracking",
+      color: "bg-blue-50 text-blue-600",
     },
     {
       icon: UserCheck,
-      title: "Comprehensive Captain Vetting",
-      description:
-        "Stringent multi-tier background screening, commercial driver's license audits, and periodic roadworthiness checks.",
-      tag: "Certified Fleet",
-      tagColor: "text-zinc-300 bg-zinc-800 border-zinc-700",
+      title: "Verified Drivers",
+      description: "Multi-tier background checks, license audits, and periodic vehicle roadworthiness inspections.",
+      tag: "Certified",
+      color: "bg-purple-50 text-purple-600",
     },
   ];
 
   return (
-    <section id="safety" className="py-16 border-t border-zinc-800/80 bg-zinc-950">
+    <section id="safety" className="py-16 bg-gray-50/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 rounded-md bg-zinc-900 border border-zinc-800 px-3 py-1 text-xs font-medium text-zinc-300 mb-3">
-            <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-            <span>NexRide Trust & Safety Protocols</span>
+          <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-1.5 text-sm font-semibold text-emerald-700 mb-4">
+            <ShieldCheck className="h-4 w-4" />
+            <span>Safety First</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100">
-            Enterprise-grade safety across every kilometer
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
+            Your safety, our priority
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-zinc-400">
-            Built upon rigorous transit safety benchmarks, real-time vehicle telematics, and 24x7 rapid incident response desks.
+          <p className="mt-2 text-sm text-slate-500">
+            Every ride is backed by real-time tracking, verified drivers, and 24×7 safety response
           </p>
         </div>
 
@@ -69,49 +65,47 @@ export const SafetyFeatures: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="rounded-2xl bg-zinc-900/60 border border-zinc-800/80 p-5 flex flex-col justify-between hover:border-zinc-700 transition"
+                className="rounded-2xl bg-white border border-gray-200 p-6 flex flex-col justify-between hover:shadow-md transition"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-200">
-                      <Icon className="h-5 w-5" />
+                  <div className="flex items-center justify-between mb-5">
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${item.color}`}>
+                      <Icon className="h-6 w-6" />
                     </div>
-                    <span
-                      className={`text-[10px] font-medium px-2 py-0.5 rounded-md border ${item.tagColor}`}
-                    >
+                    <span className="rounded-full bg-gray-100 px-2.5 py-1 text-[11px] font-semibold text-slate-500">
                       {item.tag}
                     </span>
                   </div>
 
-                  <h3 className="text-sm font-semibold text-zinc-100 mb-1.5">
+                  <h3 className="text-base font-bold text-slate-900 mb-1.5">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed">
+                  <p className="text-sm text-slate-500 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="mt-6 flex items-center gap-2 text-[11px] font-medium text-zinc-400 pt-3 border-t border-zinc-800/60">
-                  <CheckCircle className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                  <span>Always active on all trips</span>
+                <div className="mt-5 flex items-center gap-2 text-xs font-medium text-emerald-600 pt-3 border-t border-gray-100">
+                  <CheckCircle className="h-3.5 w-3.5 shrink-0" />
+                  <span>Active on every trip</span>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Emergency Assistance Desk Banner */}
-        <div className="mt-8 rounded-2xl bg-zinc-900/90 border border-zinc-800 p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        {/* Emergency Banner */}
+        <div className="mt-8 rounded-2xl bg-white border border-gray-200 p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="flex items-center gap-4">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-200">
-              <AlertCircle className="h-5 w-5" />
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600">
+              <AlertCircle className="h-6 w-6" />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-zinc-100">
-                24x7 Rapid Incident Assistance Hotline
+              <h4 className="text-base font-bold text-slate-900">
+                Emergency Assistance
               </h4>
-              <p className="text-xs text-zinc-400 mt-0.5">
-                Direct telephonic support available 365 days a year across all operational metro regions.
+              <p className="text-sm text-slate-500 mt-0.5">
+                24×7 helpline available 365 days across all cities
               </p>
             </div>
           </div>
@@ -119,13 +113,13 @@ export const SafetyFeatures: React.FC = () => {
           <div className="flex items-center gap-3">
             <a
               href="tel:18002008888"
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold transition"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-black hover:bg-gray-900 text-white text-sm font-semibold transition"
             >
-              <PhoneCall className="h-3.5 w-3.5" />
+              <PhoneCall className="h-4 w-4" />
               <span>1800-200-RIDE</span>
             </a>
-            <span className="text-xs text-zinc-300 font-medium bg-zinc-800 px-3 py-2 rounded-xl border border-zinc-700">
-              Avg. Response: &lt; 10 secs
+            <span className="text-xs text-slate-500 font-medium bg-gray-50 px-3.5 py-2.5 rounded-xl border border-gray-200">
+              Avg. response &lt; 10s
             </span>
           </div>
         </div>
