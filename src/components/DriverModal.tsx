@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   X,
   Bike,
@@ -126,6 +127,16 @@ export const DriverModal: React.FC<DriverModalProps> = ({ isOpen, onClose }) => 
               <span>Submit Application</span>
               <ChevronRight className="h-4 w-4" />
             </button>
+
+            <div className="pt-2 text-center border-t border-gray-100">
+              <Link
+                href="/driver"
+                onClick={onClose}
+                className="text-xs font-semibold text-slate-700 hover:text-slate-900 underline"
+              >
+                Already an onboarded partner? Open Driver Dashboard →
+              </Link>
+            </div>
           </form>
         )}
       </div>

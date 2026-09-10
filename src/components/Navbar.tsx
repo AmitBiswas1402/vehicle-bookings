@@ -10,6 +10,7 @@ import {
   X,
   PhoneCall,
   ShieldCheck,
+  Car,
 } from "lucide-react";
 import { MOCK_CITIES } from "@/db/mockData";
 import {
@@ -67,6 +68,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               Help
             </button>
+            <Link
+              href="/driver"
+              className="px-3 py-2 text-sm font-semibold text-amber-800 hover:text-amber-900 hover:bg-amber-50 rounded-lg transition flex items-center gap-1.5"
+            >
+              <Car className="h-3.5 w-3.5 text-amber-600" />
+              <span>Driver</span>
+            </Link>
             <Link
               href="/admin"
               className="px-3 py-2 text-sm font-semibold text-purple-700 hover:text-purple-900 hover:bg-purple-50 rounded-lg transition flex items-center gap-1.5"
@@ -142,14 +150,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <ShieldCheck className="h-3 w-3" />
                   <span>Admin Dashboard</span>
                 </Link>
-              ) : currentUser?.role ? (
-                <span
-                  className={`hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold ${
-                    currentUser.role === "DRIVER"
-                      ? "bg-sky-50 text-sky-700"
-                      : "bg-emerald-50 text-emerald-700"
-                  }`}
+              ) : currentUser?.role === "DRIVER" ? (
+                <Link
+                  href="/driver"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition shadow-xs cursor-pointer"
+                  title="Go to Driver Dashboard"
                 >
+                  <Car className="h-3 w-3 text-amber-600" />
+                  <span>Driver Dashboard</span>
+                </Link>
+              ) : currentUser?.role ? (
+                <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700">
                   {currentUser.role}
                 </span>
               ) : null}
@@ -203,6 +214,19 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             24×7 Help
           </button>
+          <Link
+            href="/driver"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-amber-800 bg-amber-50 hover:bg-amber-100 transition"
+          >
+            <span className="flex items-center gap-2">
+              <Car className="h-4 w-4 text-amber-600" />
+              Driver Dashboard
+            </span>
+            <span className="text-[10px] font-bold uppercase bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full">
+              Partner
+            </span>
+          </Link>
           <Link
             href="/admin"
             onClick={() => setMobileMenuOpen(false)}
